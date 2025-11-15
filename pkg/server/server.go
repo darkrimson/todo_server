@@ -3,6 +3,8 @@ package server
 import (
 	"net/http"
 	"os"
+
+	"github.com/username/go-final-project/pkg/api"
 )
 
 func Run() error {
@@ -14,6 +16,6 @@ func Run() error {
 	webDir := http.FileServer(http.Dir("web"))
 
 	http.Handle("/", webDir)
-
+	api.Init()
 	return http.ListenAndServe(":"+port, nil)
 }
