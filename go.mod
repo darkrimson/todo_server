@@ -7,6 +7,7 @@ require go1f v0.0.0
 replace go1f => ./
 
 require (
+	github.com/go-chi/chi/v5 v5.2.3
 	github.com/jmoiron/sqlx v1.4.0
 	github.com/mattn/go-sqlite3 v1.14.22
 	github.com/stretchr/testify v1.11.1

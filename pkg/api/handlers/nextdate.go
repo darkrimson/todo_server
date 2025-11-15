@@ -1,9 +1,10 @@
-package api
+package handlers
 
 import (
 	"net/http"
 	"time"
 
+	"github.com/username/go-final-project/pkg/consts"
 	"github.com/username/go-final-project/pkg/utils"
 )
 
@@ -17,7 +18,7 @@ func NextDayHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	now, err := time.Parse(FORMAT_DATE, nowStr)
+	now, err := time.Parse(consts.FORMAT_DATE, nowStr)
 	if err != nil {
 		w.WriteHeader(http.StatusBadRequest)
 		return
