@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/username/go-final-project/pkg/consts"
-	"github.com/username/go-final-project/pkg/utils"
+	"go1f/pkg/consts"
+	"go1f/pkg/utils"
 )
 
 func NextDayHandler(w http.ResponseWriter, r *http.Request) {

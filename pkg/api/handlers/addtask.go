@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	"net/http"
 
-	"github.com/username/go-final-project/pkg/db"
-	"github.com/username/go-final-project/pkg/db/model"
-	"github.com/username/go-final-project/pkg/utils"
+	"go1f/pkg/db"
+	"go1f/pkg/db/model"
+	"go1f/pkg/utils"
 )
 
 type response struct {

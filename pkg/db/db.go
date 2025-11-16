@@ -2,7 +2,7 @@ package db
 
 import (
 	"database/sql"
-	"fmt"
+	"fmt" // для fmt.Errorf
 	"os"
 
 	_ "github.com/mattn/go-sqlite3"
@@ -37,6 +37,8 @@ func Init(dbFile string) error {
 	if install {
 		_, err := db.Exec(schema)
 		if err != nil {
+			// Закрываем соединение в случае ошибки установки схемы
+			db.Close()
 			return fmt.Errorf("failed to install db: %v", err)
 		}
 	}

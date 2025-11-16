@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/username/go-final-project/pkg/consts"
-	"github.com/username/go-final-project/pkg/db/model"
+	"go1f/pkg/consts"
+	"go1f/pkg/db/model"
 )
 
 func CheckDate(task *model.Task) error {

@@ -1,8 +1,9 @@
 package api
 
 import (
+	"go1f/pkg/api/handlers"
+
 	"github.com/go-chi/chi/v5"
-	"github.com/username/go-final-project/pkg/api/handlers"
 )
 
 func InitRoute() *chi.Mux {

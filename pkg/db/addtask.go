@@ -1,24 +1,31 @@
 package db
 
 import (
+	"database/sql"
 	"fmt"
 
-	"github.com/username/go-final-project/pkg/db/model"
+	"go1f/pkg/db/model"
 )
 
 func AddTask(task *model.Task) (int64, error) {
+	//err := Init("scheduler.db")
+	//if err != nil {
+	//	return 0, fmt.Errorf("init scheduler error: %s", err.Error())
+	//}
+
 	var id int64
 
 	query := `
 		INSERT INTO scheduler (date, title, comment, "repeat")
 		VALUES (:date, :title, :comment, :repeat)
 	`
-	res, err := DB.Exec(query, map[string]interface{}{
-		"date":    task.Date,
-		"title":   task.Title,
-		"comment": task.Comment,
-		"repeat":  task.Repeat,
-	})
+
+	res, err := DB.Exec(query,
+		sql.Named("date", task.Date),
+		sql.Named("title", task.Title),
+		sql.Named("comment", task.Comment),
+		sql.Named("repeat", task.Repeat),
+	)
 	if err != nil {
 		return 0, fmt.Errorf("failed to insert task: %w", err)
 	}

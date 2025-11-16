@@ -5,6 +5,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/username/go-final-project/pkg/consts"
 )
 
 type RepeatRule struct {
@@ -93,7 +95,7 @@ func NextDate(now time.Time, dstart string, repeat string) (string, error) {
 		return "", err
 	}
 
-	date, err := time.Parse("20060102", dstart)
+	date, err := time.Parse(consts.FORMAT_DATE, dstart)
 	if err != nil {
 		return "", err
 	}
@@ -124,7 +126,7 @@ func NextDate(now time.Time, dstart string, repeat string) (string, error) {
 			wd := weekdayToHuman(date.Weekday())
 
 			if repeatWDays[wd] && date.After(now) {
-				return date.Format("20060102"), nil
+				return date.Format(consts.FORMAT_DATE), nil
 			}
 
 		}
@@ -187,7 +189,7 @@ func NextDate(now time.Time, dstart string, repeat string) (string, error) {
 		return "", fmt.Errorf("invalid repeat: %s", repeat)
 	}
 
-	return date.Format("20060102"), nil
+	return date.Format(consts.FORMAT_DATE), nil
 }
 
 func weekdayToHuman(w time.Weekday) int {

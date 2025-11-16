@@ -4,7 +4,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/username/go-final-project/pkg/api"
+	"go1f/pkg/api"
 )
 
 func Run() error {

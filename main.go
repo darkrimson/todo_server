@@ -8,6 +8,7 @@ import (
 )
 
 func main() {
+
 	dbFile := os.Getenv("TODO_DBFILE")
 	if dbFile == "" {
 		dbFile = "scheduler.db"
@@ -21,7 +22,7 @@ func main() {
 
 	err = server.Run()
 	if err != nil {
-		fmt.Errorf("server run error: %v", err)
+		fmt.Println(err)
 		return
 	}
 }
