@@ -1,4 +1,4 @@
-package db
+package repo
 
 import (
 	"database/sql"
@@ -7,6 +7,7 @@ import (
 	"time"
 
 	"go1f/pkg/consts"
+	"go1f/pkg/db"
 	"go1f/pkg/db/model"
 )
 
@@ -26,21 +27,21 @@ func GetTasks(limit int, search string) ([]*model.Task, error) {
 		if parsedDate, errParse := time.Parse("02.01.2006", search); errParse == nil {
 			searchDate := parsedDate.Format(consts.FORMAT_DATE)
 			querySearchByDate := `SELECT id, date, title, comment, "repeat" FROM scheduler WHERE date = :date ORDER BY date ASC LIMIT :limit`
-			rows, err = DB.Query(querySearchByDate,
+			rows, err = db.DB.Query(querySearchByDate,
 				sql.Named("date", searchDate),
 				sql.Named("limit", limit),
 			)
 		} else {
 			likePattern := "%" + search + "%"
 			querySearchByText := `SELECT id, date, title, comment, "repeat" FROM scheduler WHERE title LIKE :pattern OR comment LIKE :pattern ORDER BY date ASC LIMIT :limit`
-			rows, err = DB.Query(querySearchByText,
+			rows, err = db.DB.Query(querySearchByText,
 				sql.Named("pattern", likePattern),
 				sql.Named("limit", limit),
 			)
 		}
 	} else {
 		queryLimit := `SELECT id, date, title, comment, "repeat" FROM scheduler ORDER BY date ASC LIMIT :limit`
-		rows, err = DB.Query(queryLimit, sql.Named("limit", limit))
+		rows, err = db.DB.Query(queryLimit, sql.Named("limit", limit))
 	}
 
 	if err != nil {

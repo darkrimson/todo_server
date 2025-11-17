@@ -3,10 +3,9 @@ package handlers
 import (
 	"net/http"
 
-	"go1f/pkg/db"
+	"go1f/pkg/api/common"
+	"go1f/pkg/db/repo"
 	"go1f/pkg/utils"
-
-	"github.com/username/go-final-project/pkg/api/common"
 )
 
 func GetTaskHandler(w http.ResponseWriter, r *http.Request) {
@@ -17,7 +16,7 @@ func GetTaskHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	task, err := db.GetTask(id)
+	task, err := repo.GetTask(id)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return

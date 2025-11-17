@@ -1,10 +1,11 @@
-package db
+package repo
 
 import (
 	"database/sql"
 	"fmt"
 	"strconv"
 
+	"go1f/pkg/db"
 	"go1f/pkg/db/model"
 )
 
@@ -20,7 +21,7 @@ func GetTask(idStr string) (*model.Task, error) {
 		SELECT * FROM scheduler WHERE id=:id
 `
 	var task model.Task
-	err = DB.QueryRow(query, sql.Named("id", id)).Scan(
+	err = db.DB.QueryRow(query, sql.Named("id", id)).Scan(
 		&idInt64, &task.Date, &task.Title, &task.Comment, &task.Repeat,
 	)
 	if err != nil {

@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"go1f/pkg/api/common"
-	"go1f/pkg/db"
 	"go1f/pkg/db/model"
+	"go1f/pkg/db/repo"
 	"go1f/pkg/utils"
 )
 
@@ -40,13 +40,13 @@ func UpdateTaskHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	_, err := db.GetTask(id)
+	_, err := repo.GetTask(id)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: "task not found"}, http.StatusNotFound)
 		return
 	}
 
-	err = db.UpdateTask(&task)
+	err = repo.UpdateTask(&task)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: "internal server error"}, http.StatusInternalServerError)
 		return

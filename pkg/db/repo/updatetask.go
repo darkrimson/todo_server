@@ -1,10 +1,11 @@
-package db
+package repo
 
 import (
 	"database/sql"
 	"fmt"
 	"strconv"
 
+	"go1f/pkg/db"
 	"go1f/pkg/db/model"
 )
 
@@ -21,7 +22,7 @@ func UpdateTask(task *model.Task) error {
 			"repeat" = :repeat 
 		WHERE id = :id
 `
-	res, err := DB.Exec(query, sql.Named("date", task.Date),
+	res, err := db.DB.Exec(query, sql.Named("date", task.Date),
 		sql.Named("title", task.Title),
 		sql.Named("comment", task.Comment),
 		sql.Named("repeat", task.Repeat),

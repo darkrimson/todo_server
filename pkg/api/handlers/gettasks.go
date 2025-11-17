@@ -4,11 +4,10 @@ import (
 	"net/http"
 	"strconv"
 
-	"go1f/pkg/db"
+	"go1f/pkg/api/common"
 	"go1f/pkg/db/model"
+	"go1f/pkg/db/repo"
 	"go1f/pkg/utils"
-
-	"github.com/username/go-final-project/pkg/api/common"
 )
 
 type TasksResp struct {
@@ -26,7 +25,7 @@ func GetTasksHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	tasks, err := db.GetTasks(limit, search)
+	tasks, err := repo.GetTasks(limit, search)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusInternalServerError)
 		return

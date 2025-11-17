@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"go1f/pkg/api/common"
-	"go1f/pkg/db"
+	"go1f/pkg/db/repo"
 	"go1f/pkg/utils"
 )
 
@@ -16,7 +16,7 @@ func DeleteTaskHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	err := db.DeleteTask(id)
+	err := repo.DeleteTask(id)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return

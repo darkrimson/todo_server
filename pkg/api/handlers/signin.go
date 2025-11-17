@@ -9,8 +9,7 @@ import (
 
 	"go1f/pkg/api/auth"
 	"go1f/pkg/api/common"
-
-	"github.com/username/go-final-project/pkg/utils"
+	"go1f/pkg/utils"
 )
 
 type SigninRequest struct {

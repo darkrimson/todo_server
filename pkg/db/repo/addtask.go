@@ -1,9 +1,10 @@
-package db
+package repo
 
 import (
 	"database/sql"
 	"fmt"
 
+	"go1f/pkg/db"
 	"go1f/pkg/db/model"
 )
 
@@ -16,7 +17,7 @@ func AddTask(task *model.Task) (int64, error) {
 		VALUES (:date, :title, :comment, :repeat)
 	`
 
-	res, err := DB.Exec(query,
+	res, err := db.DB.Exec(query,
 		sql.Named("date", task.Date),
 		sql.Named("title", task.Title),
 		sql.Named("comment", task.Comment),

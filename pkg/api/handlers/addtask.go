@@ -5,8 +5,8 @@ import (
 	"net/http"
 
 	"go1f/pkg/api/common"
-	"go1f/pkg/db"
 	"go1f/pkg/db/model"
+	"go1f/pkg/db/repo"
 	"go1f/pkg/utils"
 )
 
@@ -29,7 +29,7 @@ func AddTaskHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	id, err := db.AddTask(&task)
+	id, err := repo.AddTask(&task)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return

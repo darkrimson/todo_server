@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"go1f/pkg/api/common"
-	"go1f/pkg/db"
+	"go1f/pkg/db/repo"
 	"go1f/pkg/utils"
 )
 
@@ -17,14 +17,14 @@ func DoneTaskHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	task, err := db.GetTask(id)
+	task, err := repo.GetTask(id)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return
 	}
 
 	if task.Repeat == "" {
-		err = db.DeleteTask(id)
+		err = repo.DeleteTask(id)
 		if err != nil {
 			utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 			return
@@ -41,7 +41,7 @@ func DoneTaskHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	task.Date = nextDate
-	err = db.UpdateTask(task)
+	err = repo.UpdateTask(task)
 	if err != nil {
 		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return
