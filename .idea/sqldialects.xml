@@ -3,5 +3,6 @@
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/pkg/db/addtask.go" dialect="GenericSQL" />
     <file url="file://$PROJECT_DIR$/pkg/db/db.go" dialect="GenericSQL" />
+    <file url="file://$PROJECT_DIR$/pkg/db/updatetask.go" dialect="GenericSQL" />
   </component>
 </project>

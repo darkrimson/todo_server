@@ -14,7 +14,9 @@ func InitRoute() *chi.Mux {
 		r.Get("/tasks", handlers.GetTasksHandler)
 		r.Get("/task", handlers.GetTaskHandler)
 		r.Post("/task", handlers.AddTaskHandler)
+		r.Post("/task/done", handlers.DoneTaskHandler)
 		r.Put("/task", handlers.UpdateTaskHandler)
+		r.Delete("/task", handlers.DeleteTaskHandler)
 
 	})
 

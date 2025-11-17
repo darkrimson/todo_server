@@ -10,10 +10,7 @@ import (
 	"go1f/pkg/db/model"
 )
 
-func Tasks(limit int, search string) ([]*model.Task, error) {
-	if DB == nil {
-		return nil, fmt.Errorf("database not initialized")
-	}
+func GetTasks(limit int, search string) ([]*model.Task, error) {
 
 	if limit <= 0 {
 		limit = 1

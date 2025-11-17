@@ -2,7 +2,7 @@ package db
 
 import (
 	"database/sql"
-	"fmt" // для fmt.Errorf
+	"fmt"
 	"os"
 
 	_ "github.com/mattn/go-sqlite3"

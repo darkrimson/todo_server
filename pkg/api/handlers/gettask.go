@@ -3,11 +3,12 @@ package handlers
 import (
 	"net/http"
 
-	"github.com/username/go-final-project/pkg/db"
-	"github.com/username/go-final-project/pkg/utils"
+	"go1f/pkg/db"
+	"go1f/pkg/utils"
 )
 
 func GetTaskHandler(w http.ResponseWriter, r *http.Request) {
+
 	id := r.URL.Query().Get("id")
 	if id == "" {
 		http.Error(w, `{"error":"id is required"}`, http.StatusBadRequest)

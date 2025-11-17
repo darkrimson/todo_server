@@ -6,7 +6,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/username/go-final-project/pkg/consts"
+	"go1f/pkg/consts"
 )
 
 type RepeatRule struct {

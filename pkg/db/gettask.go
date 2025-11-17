@@ -3,8 +3,9 @@ package db
 import (
 	"database/sql"
 	"fmt"
-	"go1f/pkg/db/model"
 	"strconv"
+
+	"go1f/pkg/db/model"
 )
 
 func GetTask(idStr string) (*model.Task, error) {

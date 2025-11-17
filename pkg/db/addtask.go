@@ -8,10 +8,6 @@ import (
 )
 
 func AddTask(task *model.Task) (int64, error) {
-	//err := Init("scheduler.db")
-	//if err != nil {
-	//	return 0, fmt.Errorf("init scheduler error: %s", err.Error())
-	//}
 
 	var id int64
 

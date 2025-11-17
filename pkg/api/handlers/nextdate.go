@@ -9,6 +9,7 @@ import (
 )
 
 func NextDayHandler(w http.ResponseWriter, r *http.Request) {
+
 	nowStr := r.URL.Query().Get("now")
 	dateStr := r.URL.Query().Get("date")
 	repeat := r.URL.Query().Get("repeat")

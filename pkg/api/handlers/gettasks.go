@@ -1,12 +1,12 @@
 package handlers
 
 import (
-	"go1f/pkg/db"
-	"go1f/pkg/db/model"
 	"net/http"
 	"strconv"
 
-	"github.com/username/go-final-project/pkg/utils"
+	"go1f/pkg/db"
+	"go1f/pkg/db/model"
+	"go1f/pkg/utils"
 )
 
 type TasksResp struct {
@@ -24,7 +24,7 @@ func GetTasksHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	}
 
-	tasks, err := db.Tasks(limit, search)
+	tasks, err := db.GetTasks(limit, search)
 	if err != nil {
 		http.Error(w, `{"error":"`+err.Error()+`"}`, http.StatusInternalServerError)
 	}
