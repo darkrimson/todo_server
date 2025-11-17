@@ -14,28 +14,24 @@ func AddTaskHandler(w http.ResponseWriter, r *http.Request) {
 
 	var task model.Task
 	if err := json.NewDecoder(r.Body).Decode(&task); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.Response{Error: "invalid JSON"})
+		utils.WriteJSON(w, common.Response{Error: "invalid JSON"}, http.StatusBadRequest)
 		return
 	}
 	defer r.Body.Close()
 
 	if task.Title == "" {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.Response{Error: "title is required"})
+		utils.WriteJSON(w, common.Response{Error: "title is required"}, http.StatusBadRequest)
 		return
 	}
 
 	if err := utils.CheckDate(&task); err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.Response{Error: "invalid date"})
+		utils.WriteJSON(w, common.Response{Error: "invalid date"}, http.StatusBadRequest)
 		return
 	}
 
 	id, err := db.AddTask(&task)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		json.NewEncoder(w).Encode(common.Response{Error: err.Error()})
+		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return
 	}
 

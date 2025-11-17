@@ -7,6 +7,8 @@ import (
 	"go1f/pkg/db"
 	"go1f/pkg/db/model"
 	"go1f/pkg/utils"
+
+	"github.com/username/go-final-project/pkg/api/common"
 )
 
 type TasksResp struct {
@@ -26,7 +28,8 @@ func GetTasksHandler(w http.ResponseWriter, r *http.Request) {
 
 	tasks, err := db.GetTasks(limit, search)
 	if err != nil {
-		http.Error(w, `{"error":"`+err.Error()+`"}`, http.StatusInternalServerError)
+		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusInternalServerError)
+		return
 	}
 
 	resp := TasksResp{Tasks: tasks}

@@ -1,7 +1,6 @@
 package handlers
 
 import (
-	"encoding/json"
 	"net/http"
 	"time"
 
@@ -14,23 +13,20 @@ func DoneTaskHandler(w http.ResponseWriter, r *http.Request) {
 
 	id := r.URL.Query().Get("id")
 	if id == "" {
-		w.WriteHeader(http.StatusBadRequest)
-		_ = json.NewEncoder(w).Encode(common.Response{Error: "id is required"})
+		utils.WriteJSON(w, common.Response{Error: "id is required"}, http.StatusBadRequest)
 		return
 	}
 
 	task, err := db.GetTask(id)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		_ = json.NewEncoder(w).Encode(common.Response{Error: err.Error()})
+		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return
 	}
 
 	if task.Repeat == "" {
 		err = db.DeleteTask(id)
 		if err != nil {
-			w.WriteHeader(http.StatusBadRequest)
-			_ = json.NewEncoder(w).Encode(common.Response{Error: err.Error()})
+			utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 			return
 		}
 		utils.WriteJSON(w, common.Response{}, http.StatusOK)
@@ -40,16 +36,14 @@ func DoneTaskHandler(w http.ResponseWriter, r *http.Request) {
 	now := time.Now()
 	nextDate, err := utils.NextDate(now, task.Date, task.Repeat)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		_ = json.NewEncoder(w).Encode(common.Response{Error: err.Error()})
+		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return
 	}
 
 	task.Date = nextDate
 	err = db.UpdateTask(task)
 	if err != nil {
-		w.WriteHeader(http.StatusBadRequest)
-		_ = json.NewEncoder(w).Encode(common.Response{Error: err.Error()})
+		utils.WriteJSON(w, common.Response{Error: err.Error()}, http.StatusBadRequest)
 		return
 	}
 
